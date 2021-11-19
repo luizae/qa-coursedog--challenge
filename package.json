@@ -1,0 +1,15 @@
+{
+  "name": "coursedog-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^9.0.0"
+  },
+  "scripts": {
+    "test": "LANG=en_EN.UTF-8 TZ=UTC ./node_modules/.bin/cypress open"
+  },
+  "author": "",
+  "license": "ISC"
+}
