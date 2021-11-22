@@ -1,9 +1,41 @@
-describe('look for events on the search bar', () => {
-    it('type what you want to find', () => {
+describe('looking for "Today Events"', () => {
+    it('By a date', () => {
+        cy.clock(Date.UTC(2021, 10, 20), ['Date']);
         cy.visit('https://damian-events.coursedog.com');
-        cy.wait(300);
-        cy.get('input').type("Tokyo");
-        cy.get('.search__button').click();
-        cy.get('#61w5wfhCtxaJ6zYlebWA').contains(/Tokyo/);
+        cy.get('[href="/today"]').click();
+        cy.wait(100);
+        cy.get('[aria-label="Event date is Sat Nov 20 2021"]').contains(/Nov\s20\s2021/);
         });
+})
+
+describe('Using the filter', () => {
+    it('Filter by organization', () => {
+        cy.clock(Date.UTC(2021, 10, 20), ['Date']);
+        cy.get('#orgSelect').select('Model UN');
+        cy.intercept('GET', 'https://dev.coursedog.com/api/v1/em/demoschool_ezra/meetings/search/$filters?limit=20&skip=0&organization=n0e9tGIexixWt9GAcQJc&startDate=2021-11-20&skipSetupMeetings=true&skipTeardownMeetings=true&skipHiddenPublicMeetings=true&skipPrivateMeetings=true&excludeInvalidDates=true&excludeInvalidTimes=true&groupByEventAndDate=true&includeAcademicMeetings=false&orderBy=startDate,startTime').as('getFilter');
+
+        cy.wait("@getFilter").get("@getFilter").should(({ response }) => {
+            expect(response.statusCode).to.equal(200);
+            expect(response.body).to.have.property("numberOfMeetings");
+            
+            cy.get('[class="text-black font-bold text-xl mt-0 mb-2 hover:underline leading-tight"]')
+            .should('have.length', response.body.numberOfMeetings)
+            .each(($el) => {
+                cy.wrap($el).contains(/Model/);
+            });
+        });
+    });
+})
+
+describe('looking for "Featured Events"', () => {
+    it('By menu', () => {
+        cy.clock(Date.UTC(2021, 10, 20), ['Date']);
+        cy.visit('https://damian-events.coursedog.com');
+        cy.intercept('GET', 'https://damian-events.coursedog.com/featured').as('getFeatured');
+        cy.get('[href="/featured"]').click();
+
+        cy.wait("@getFeatured").get("@getFeatured").should(({ response }) => {
+            expect(response.statusCode).to.equal(200);
+        });
+    });
 })

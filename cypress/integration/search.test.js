@@ -1,9 +1,9 @@
-describe('looking for "Today Events"', () => {
-    it('By a date', () => {
-        cy.clock(Date.UTC(2021, 10, 20), ['Date']);
+describe('look for events on the search bar', () => {
+    it('type what you want to find', () => {
         cy.visit('https://damian-events.coursedog.com');
-        cy.get('[href="/today"]').click();
-        cy.wait(100);
-        cy.get('[aria-label="Event date is Sat Nov 20 2021"]').contains(/Nov\s20\s2021/);
+        cy.wait(300);
+        cy.get('input').type("Tokyo");
+        cy.get('.search__button').click();
+        cy.get('[class="text-black font-bold text-xl mt-0 mb-2 hover:underline leading-tight"]').contains(/Tokyo/);
         });
 })
