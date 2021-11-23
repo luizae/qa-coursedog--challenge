@@ -9,7 +9,7 @@ What you going to need to run the tests:
 
 export LANG="en_EN.UTF-8"
 
-Improvment:
+Improvement:
 
 - When I select a specific date from the calendar: I can only see events that happen that day.
 
