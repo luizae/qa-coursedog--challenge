@@ -7,8 +7,6 @@ What you going to need to run the tests:
 - npm install
 - npm run test
 
-export LANG="en_EN.UTF-8"
-
 Improvement:
 
 - When I select a specific date from the calendar: I can only see events that happen that day.
@@ -25,9 +23,11 @@ Problem found during the tests:
     https://dev.coursedog.com/api/v1/em/demoschool_ezra/meetings?includeRelatedData=true&skipSetupMeetings=true&skipTeardownMeetings=true&skipHiddenPublicMeetings=true&skipPrivateMeetings=true&excludeInvalidDates=true&excludeInvalidTimes=true&featured=true&startDate=2021-09-02&endDate=2021-09-09&groupByEventAndDate=true&orderBy=startDate,startTime
 
 - When I use the Search Input in the navigation bar and type in "Tokyo" and confirm:
+
     First time i made the test to looking for events in the search bar, the searched term "Tokyo" were able to bring an event.
     The second day that I played the test again, there were no events in the requisition, and this problem just occur with the "Tokyo" name.
     Because of this matter, I had to skip this test.
 
 - When I click on the QA Task Submission event card
+
     Note that, in the requisition url, it's been settled that it has a start and a end date for looking for the events. That event "QA Task submition" is at Nov 18, so that one will not appear at this day (September 2nd) requision for "Featured Events".
