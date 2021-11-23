@@ -8,7 +8,8 @@
     "cypress": "^9.0.0"
   },
   "scripts": {
-    "test": "LANG=en_EN.UTF-8 TZ=UTC ./node_modules/.bin/cypress open"
+    "test": "LANG=en_EN.UTF-8 TZ=UTC ./node_modules/.bin/cypress open",
+    "test:headless": "LANG=en_EN.UTF-8 TZ=UTC ./node_modules/.bin/cypress run"
   },
   "author": "",
   "license": "ISC"

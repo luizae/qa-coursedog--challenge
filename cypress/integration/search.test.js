@@ -1,6 +1,6 @@
 describe('look for events on the search bar', () => {
     it.skip('type what you want to find', () => {
-        cy.visit('https://damian-events.coursedog.com');
+        cy.visit('/');
         cy.wait(300);
         cy.get('input').type("Tokyo");
         cy.get('.search__button').click();

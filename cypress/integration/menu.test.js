@@ -1,7 +1,7 @@
 describe('looking for "Today Events"', () => {
     it('By a date', () => {
         cy.clock(Date.UTC(2021, 10, 20), ['Date']);
-        cy.visit('https://damian-events.coursedog.com');
+        cy.visit('/');
         cy.get('[href="/today"]').click();
         cy.wait(100);
         cy.get('[aria-label="Event date is Sat Nov 20 2021"]').contains(/Nov\s20\s2021/);
@@ -32,7 +32,7 @@ describe('looking for "Featured Events"', () => {
         cy.clock(Date.UTC(2021, 8, 2), ['Date']);
         cy.intercept('GET', 'https://dev.coursedog.com/api/v1/em/demoschool_ezra/meetings?includeRelatedData=true&skipSetupMeetings=true&skipTeardownMeetings=true&skipHiddenPublicMeetings=true&skipPrivateMeetings=true&excludeInvalidDates=true&excludeInvalidTimes=true&featured=true&startDate=2021-09-02&endDate=2021-09-09&groupByEventAndDate=true&orderBy=startDate,startTime').as('getFeatured');
   
-        cy.visit('https://damian-events.coursedog.com');
+        cy.visit('/');
         cy.get('[href="/featured"]').click();
 
         cy.wait("@getFeatured").get("@getFeatured").should(({ response }) => {
